@@ -22,9 +22,6 @@ gem 'bootstrap-sass'
 gem 'bootswatch-rails'
 gem 'font-awesome-rails'
 
-# CSS Support
-gem 'less-rails'
-
 # Fast Haml
 gem 'faml'
 
