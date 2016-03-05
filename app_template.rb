@@ -138,7 +138,7 @@ application  do
     config.generators do |g|
       g.orm :active_record
       g.template_engine :haml
-      g.test_framework  :rspec, :fixture => true
+      g.test_framework :rspec, :fixture => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
       g.view_specs false
       g.controller_specs true
@@ -236,6 +236,7 @@ insert_into_file 'spec/rails_helper.rb',%(
 ), after: 'RSpec.configure do |config|'
 
 insert_into_file 'spec/rails_helper.rb', "\nrequire 'factory_girl_rails'", after: "require 'rspec/rails'"
+run 'rm -rf test'
 
 # git init
 # ----------------------------------------------------------------
