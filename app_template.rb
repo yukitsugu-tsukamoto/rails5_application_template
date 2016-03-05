@@ -34,10 +34,7 @@ gem 'kaminari'
 # ============================
 # Utils
 # ============================
-# App Server
-gem 'unicorn'
-
-# # Process Management
+# Process Management
 gem 'foreman'
 
 # Hash extensions
@@ -69,6 +66,9 @@ group :development do
 end
 
 group :development, :test do
+  # App Server
+  gem 'puma'
+
   # Pry & extensions
   gem 'pry-rails'
   gem 'pry-coolline'
@@ -108,7 +108,10 @@ group :test do
   gem 'database_rewinder'
 end
 
-group :production, :staging do
+group :production do
+  # App Server
+  gem 'unicorn'
+
   # For Heroku / Dokku
   gem 'rails_12factor'
 end
