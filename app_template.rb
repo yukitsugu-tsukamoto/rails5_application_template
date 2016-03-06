@@ -6,7 +6,7 @@ run 'rm README.rdoc'
 # .gitignore
 run 'gibo OSX Ruby Rails JetBrains SASS SublimeText > .gitignore' rescue nil
 gsub_file '.gitignore', /^config\/initializers\/secret_token\.rb$/, ''
-gsub_file '.gitignore', /config\/secret\.yml/, ''
+gsub_file '.gitignore', /^config\/secrets\.yml$/, ''
 
 # Remove puma from Gemfile
 gsub_file 'Gemfile', '# Use Puma as the app server'
@@ -51,6 +51,9 @@ gem 'exception_notification'
 
 # Embed the V8 Javascript Interpreter
 gem 'therubyracer'
+
+# configuration using ENV
+gem 'figaro'
 
 # ============================
 # Environment Group
@@ -186,14 +189,19 @@ end
 run 'rm -rf app/assets/stylesheets/application.css'
 get 'https://raw.github.com/morizyun/rails4_template/master/app/assets/stylesheets/application.css.scss', 'app/assets/stylesheets/application.css.scss'
 
-# Simple Form
+# Initialize SimpleForm
 Bundler.with_clean_env do
   run 'bundle exec rails g simple_form:install --bootstrap'
 end
 
-# Kaminari config
+# Initialize Kaminari config
 Bundler.with_clean_env do
   run 'bundle exec rails g kaminari:config'
+end
+
+# Initialize Figaro config
+Bundler.with_clean_env do
+  run 'bundle exec figaro install'
 end
 
 # Unicorn(App Server)
