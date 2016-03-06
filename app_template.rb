@@ -175,6 +175,9 @@ insert_into_file 'config/environments/production.rb',%(
       :sender_address => %{"notifier" <#{mail_address}>},
       :exception_recipients => %w{#{mail_address}}
     }
+
+  # Sanitizing parameter
+  config.filter_parameters += [/(password|private_token|api_endpoint)/i]
 ), after: 'config.active_record.dump_schema_after_migration = false'
 
 # set Japanese locale
