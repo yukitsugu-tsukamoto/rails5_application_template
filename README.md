@@ -24,7 +24,7 @@ Execute following command
 
 Description of this template in Japanese is as follows;
 
-**[Rails 5.0.0 + Bootstrap 1コマンドで！](http://morizyun.github.io/blog/rails5-application-templates/)**
+**[Rails 5.0.0 + Bootstrap 1コマンドで！ - 酒と泪とRubyとRailsと](http://morizyun.github.io/blog/rails5-application-templates/)**
 
 ## Supported versions
 
