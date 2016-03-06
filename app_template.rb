@@ -129,12 +129,12 @@ application  do
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
 
-    # 日本語化
+    # Set locale
     I18n.enforce_available_locales = true
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ja
 
-    # generatorの設定
+    # Set generator
     config.generators do |g|
       g.orm :active_record
       g.template_engine :haml
@@ -153,7 +153,7 @@ end
 
 # For Bullet (N+1 Problem)
 insert_into_file 'config/environments/development.rb',%(
-  # Bulletの設定
+  # Bullet Setting (help to kill N + 1 query)
   config.after_initialize do
     Bullet.enable = true # enable Bullet gem, otherwise do nothing
     Bullet.alert = true # pop up a JavaScript alert in the browser
