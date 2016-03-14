@@ -42,6 +42,7 @@ gem 'hashie'
 
 # Presenter Layer Helper
 gem 'cells'
+gem 'cells-haml'
 
 # Table(Migration) Comment
 gem 'migration_comments'
