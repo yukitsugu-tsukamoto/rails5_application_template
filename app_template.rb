@@ -110,6 +110,9 @@ group :test do
 
   # Cleaning test data
   gem 'database_rewinder'
+
+  # This gem brings back assigns to your controller tests
+  gem 'rails-controller-testing'
 end
 
 group :production do
@@ -244,6 +247,12 @@ insert_into_file 'spec/rails_helper.rb',%(
       c.cassette_library_dir = 'spec/vcr'
       c.hook_into :webmock
       c.allow_http_connections_when_no_cassette = true
+  end
+
+  [:controller, :view, :request].each do |type|
+    config.include ::Rails::Controller::Testing::TestProcess, :type => type
+    config.include ::Rails::Controller::Testing::TemplateAssertions, :type => type
+    config.include ::Rails::Controller::Testing::Integration, :type => type
   end
 ), after: 'RSpec.configure do |config|'
 
