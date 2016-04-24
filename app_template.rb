@@ -254,6 +254,7 @@ insert_into_file 'spec/rails_helper.rb',%(
     config.include ::Rails::Controller::Testing::TemplateAssertions, :type => type
     config.include ::Rails::Controller::Testing::Integration, :type => type
   end
+  config.include Cell::Testing, type: :cell
 ), after: 'RSpec.configure do |config|'
 
 insert_into_file 'spec/rails_helper.rb', "\nrequire 'factory_girl_rails'", after: "require 'rspec/rails'"
