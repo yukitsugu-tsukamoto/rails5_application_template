@@ -123,7 +123,7 @@ CODE
 
 
 Bundler.with_clean_env do
-  run 'bundle install --path vendor/bundle --jobs=2 --without production'
+  run 'bundle install --path vendor/bundle --jobs=4 --without production'
 end
 
 # set config/application.rb
