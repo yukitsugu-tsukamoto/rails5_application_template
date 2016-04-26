@@ -1,8 +1,5 @@
 require 'bundler'
 
-# clean file
-run 'rm README.rdoc'
-
 # .gitignore
 run 'gibo OSX Ruby Rails JetBrains SASS SublimeText > .gitignore' rescue nil
 gsub_file '.gitignore', /^config\/initializers\/secret_token\.rb$/, ''

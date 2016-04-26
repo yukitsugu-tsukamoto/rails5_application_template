@@ -15,10 +15,10 @@ Execute following command
     gem update rails
 
     # if you want to use PostgreSQL, please execute following command;
-    bundle exec rails new test_app --database=postgresql --skip-test-unit --skip-bundle -m https://raw.github.com/morizyun/rails4_template/master/app_template.rb
+    bundle exec rails new test_app --database=postgresql -T --skip-bundle -m https://raw.github.com/morizyun/rails4_template/master/app_template.rb
 
     # if you want to use MySQL, please execute following command;
-    bundle exec rails new test_app --database=mysql --skip-test-unit --skip-bundle -m https://raw.github.com/morizyun/rails4_template/master/app_template.rb
+    bundle exec rails new test_app --database=mysql -T --skip-bundle -m https://raw.github.com/morizyun/rails4_template/master/app_template.rb
 
 ## Detail explanation
 
