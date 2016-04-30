@@ -6,19 +6,48 @@ It's easy to start Rails5 application with useful gems.
 
 ## Reparation
 
-    brew install wget gibo
+Fill following commands:
+
+```
+# Update Homebrew
+brew update
+
+# Generate modern .gitignore
+$ brew install wget gibo
+
+# Update ruby-build
+brew upgrade ruby-build
+
+# Show some ruby versions which rbenv can install
+rbenv install --list
+
+# Install latest Ruby(e.g. 2.3.1)
+rbenv install 2.3.1
+
+# Set defalt ruby version in your local
+echo '2.3.1' > .ruby-version
+
+# check current rbenv setting
+rbenv versions
+
+# Set to use rails latest version(e.g. 5.0.0.beta4)
+echo "source 'https://rubygems.org'\n\ngem 'rails', '>= 5.0.0.beta4'" > Gemfile
+
+# Install RubyGems in Gemfile
+bundle install --jobs=4 --path=vendor/bundle
+```
 
 ## Execution command
 
-Execute following command
+Execute following commands:
 
-    gem update rails
+```
+# if you want to use PostgreSQL, please execute following command;
+$ bundle exec rails new test_app --database=postgresql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
 
-    # if you want to use PostgreSQL, please execute following command;
-    bundle exec rails new test_app --database=postgresql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
-
-    # if you want to use MySQL, please execute following command;
-    bundle exec rails new test_app --database=mysql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
+# if you want to use MySQL, please execute following command;
+$ bundle exec rails new test_app --database=mysql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
+```
 
 ## Detail explanation
 
@@ -28,8 +57,8 @@ Description of this template in Japanese is as follows;
 
 ## Supported versions
 
-- Ruby 2.3.0
-- Rails 5.0.0.beta3
+- Ruby 2.3.1
+- Rails 5.0.0.beta4
 
 ## Contributing
 

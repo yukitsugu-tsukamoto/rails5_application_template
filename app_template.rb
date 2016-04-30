@@ -7,7 +7,7 @@ gsub_file '.gitignore', /^config\/secrets\.yml$/, ''
 
 # Remove puma from Gemfile
 gsub_file 'Gemfile', '# Use Puma as the app server'
-gsub_file 'Gemfile', "gem 'puma'", ''
+gsub_file 'Gemfile', "# Use Puma as the app server\ngem 'puma', '~> 3.0'\n", ''
 
 # add to Gemfile
 append_file 'Gemfile', <<-CODE
@@ -62,8 +62,8 @@ group :development do
   # help to kill N+1
   gem 'bullet'
 
-  # Rack Profiler
-  # gem 'rack-mini-profiler'
+  # A Ruby static code analyzer
+  gem 'rubocop', require: false
 end
 
 group :development, :test do
@@ -191,7 +191,7 @@ end
 
 # Bootstrap/Bootswach/Font-Awesome
 run 'rm -rf app/assets/stylesheets/application.css'
-get 'https://raw.github.com/morizyun/rails4_template/master/app/assets/stylesheets/application.css.scss', 'app/assets/stylesheets/application.css.scss'
+get 'https://raw.github.com/morizyun/rails5_application_template/master/app/assets/stylesheets/application.css.scss', 'app/assets/stylesheets/application.css.scss'
 
 # Initialize SimpleForm
 Bundler.with_clean_env do
@@ -210,8 +210,8 @@ end
 
 # Unicorn(App Server)
 run 'mkdir config/unicorn'
-get 'https://raw.github.com/morizyun/rails4_template/master/config/unicorn/development.rb', 'config/unicorn/development.rb'
-get 'https://raw.github.com/morizyun/rails4_template/master/config/unicorn/production.rb', 'config/unicorn/production.rb'
+get 'https://raw.github.com/morizyun/rails5_application_template/master/config/unicorn/development.rb', 'config/unicorn/development.rb'
+get 'https://raw.github.com/morizyun/rails5_application_template/master/config/unicorn/production.rb', 'config/unicorn/production.rb'
 run "echo 'web: bundle exec unicorn -p $PORT -c ./config/unicorn/production.rb' > Procfile"
 
 # Rspec
@@ -256,6 +256,10 @@ insert_into_file 'spec/rails_helper.rb',%(
 
 insert_into_file 'spec/rails_helper.rb', "\nrequire 'factory_girl_rails'", after: "require 'rspec/rails'"
 run 'rm -rf test'
+
+# Rubocop
+# ----------------------------------------------------------------
+get 'https://raw.github.com/morizyun/rails5_application_template/master/root/.rubocop.yml', '.rubocop.yml'
 
 # git init
 # ----------------------------------------------------------------
