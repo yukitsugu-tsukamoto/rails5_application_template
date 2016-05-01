@@ -172,9 +172,9 @@ insert_into_file 'config/environments/production.rb',%(
   # Exception Notifier
   Rails.application.config.middleware.use ExceptionNotification::Rack,
     :email => {
-      :email_prefix => "[#{app_name}] ",
-      :sender_address => %{"notifier" <#{mail_address}>},
-      :exception_recipients => %w{#{mail_address}}
+      :email_prefix => '[#{app_name}] ',
+      :sender_address => '"notifier" <#{mail_address}>',
+      :exception_recipients => "#{mail_address}"
     }
 
   # Sanitizing parameter
