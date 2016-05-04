@@ -260,6 +260,12 @@ insert_into_file 'spec/rails_helper.rb',%(
 insert_into_file 'spec/rails_helper.rb', "\nrequire 'factory_girl_rails'", after: "require 'rspec/rails'"
 run 'rm -rf test'
 
+# Rake DB Create
+# ----------------------------------------------------------------
+Bundler.with_clean_env do
+  run 'bundle exec rake db:create'
+end
+
 # git init
 # ----------------------------------------------------------------
 git :init
