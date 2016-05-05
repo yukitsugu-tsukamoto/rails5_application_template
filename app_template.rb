@@ -41,9 +41,6 @@ gem 'hashie'
 gem 'cells'
 gem 'cells-haml'
 
-# Table(Migration) Comment
-gem 'migration_comments'
-
 # Exception Notifier
 gem 'exception_notification'
 
