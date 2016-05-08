@@ -5,9 +5,12 @@ run 'gibo OSX Ruby Rails JetBrains SASS SublimeText > .gitignore' rescue nil
 gsub_file '.gitignore', /^config\/initializers\/secret_token\.rb$/, ''
 gsub_file '.gitignore', /^config\/secrets\.yml$/, ''
 
-# Remove puma from Gemfile
-gsub_file 'Gemfile', '# Use Puma as the app server'
-gsub_file 'Gemfile', "# Use Puma as the app server\ngem 'puma', '~> 3.0'\n", ''
+# Ruby Version
+ruby_version = `ruby -v`.scan(/\d\.\d\.\d/).flatten.first
+insert_into_file 'Gemfile',%(
+ruby '#{ruby_version}'
+), after: "source 'https://rubygems.org'"
+run "echo '#{ruby_version}' > ./.ruby-version"
 
 # add to Gemfile
 append_file 'Gemfile', <<-CODE
@@ -48,7 +51,7 @@ gem 'exception_notification'
 gem 'therubyracer'
 
 # configuration using ENV
-gem 'figaro'
+gem 'figaro', github: 'morizyun/figaro'
 
 # ============================
 # Environment Group
@@ -64,9 +67,6 @@ group :development do
 end
 
 group :development, :test do
-  # App Server
-  gem 'puma'
-
   # Pry & extensions
   gem 'pry-rails'
   gem 'pry-coolline'
@@ -110,14 +110,10 @@ group :test do
 end
 
 group :production do
-  # App Server
-  gem 'unicorn'
-
   # For Heroku / Dokku
   gem 'rails_12factor'
 end
 CODE
-
 
 Bundler.with_clean_env do
   run 'bundle install --path vendor/bundle --jobs=4 --without production'
@@ -205,12 +201,12 @@ Bundler.with_clean_env do
   run 'bundle exec figaro install'
 end
 
-# Unicorn(App Server)
-run 'mkdir config/unicorn'
-get 'https://raw.github.com/morizyun/rails5_application_template/master/config/unicorn/development.rb', 'config/unicorn/development.rb'
-get 'https://raw.github.com/morizyun/rails5_application_template/master/config/unicorn/production.rb', 'config/unicorn/heroku.rb'
-get 'https://raw.github.com/morizyun/rails5_application_template/master/config/unicorn/production.rb', 'config/unicorn/production.rb'
-run "echo 'web: bundle exec unicorn -p $PORT -c ./config/unicorn/heroku.rb' > Procfile"
+# Puma(App Server)
+run 'mkdir config/puma'
+get 'https://raw.github.com/morizyun/rails5_application_template/master/config/puma/production.rb', 'config/puma/production.rb'
+
+# Procfile
+run "echo 'web: bundle exec puma -C config/puma/production.rb' > Procfile"
 
 # Rspec
 # ----------------------------------------------------------------

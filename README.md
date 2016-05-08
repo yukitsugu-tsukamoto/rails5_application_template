@@ -30,8 +30,8 @@ echo '2.3.1' > .ruby-version
 # check current rbenv setting
 rbenv versions
 
-# Set to use rails latest version(e.g. 5.0.0.beta4)
-echo "source 'https://rubygems.org'\n\ngem 'rails', '>= 5.0.0.beta4'" > Gemfile
+# Set to use rails latest version(e.g. 5.0.0.rc1)
+echo "source 'https://rubygems.org'\n\ngem 'rails', '>= 5.0.0.rc1'" > Gemfile
 
 # Install RubyGems in Gemfile
 bundle install --jobs=4 --path=vendor/bundle
@@ -58,7 +58,7 @@ Description of this template in Japanese is as follows;
 ## Supported versions
 
 - Ruby 2.3.1
-- Rails 5.0.0.beta4
+- Rails 5.0.0.rc1
 
 ## Contributing
 
