@@ -208,8 +208,9 @@ end
 # Unicorn(App Server)
 run 'mkdir config/unicorn'
 get 'https://raw.github.com/morizyun/rails5_application_template/master/config/unicorn/development.rb', 'config/unicorn/development.rb'
+get 'https://raw.github.com/morizyun/rails5_application_template/master/config/unicorn/production.rb', 'config/unicorn/heroku.rb'
 get 'https://raw.github.com/morizyun/rails5_application_template/master/config/unicorn/production.rb', 'config/unicorn/production.rb'
-run "echo 'web: bundle exec unicorn -p $PORT -c ./config/unicorn/production.rb' > Procfile"
+run "echo 'web: bundle exec unicorn -p $PORT -c ./config/unicorn/heroku.rb' > Procfile"
 
 # Rspec
 # ----------------------------------------------------------------
@@ -262,14 +263,6 @@ get 'https://raw.github.com/morizyun/rails5_application_template/master/root/.ru
 # ----------------------------------------------------------------
 Bundler.with_clean_env do
   run 'bundle exec rake db:create'
-end
-
-# Initial folders
-# ----------------------------------------------------------------
-%w(log tmp tmp/pids).each do |target|
-  run "touch #{target}/.keep"
-  run "chmod -R 777 #{target}"
-  run "git add #{target}/.keep -f"
 end
 
 # git init
