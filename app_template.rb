@@ -264,6 +264,14 @@ Bundler.with_clean_env do
   run 'bundle exec rake db:create'
 end
 
+# Initial folders
+# ----------------------------------------------------------------
+%w(log tmp tmp/pids).each do |target|
+  run "touch #{target}/.keep"
+  run "chmod -R 777 #{target}"
+  run "git add #{target}/.keep -f"
+end
+
 # git init
 # ----------------------------------------------------------------
 git :init
