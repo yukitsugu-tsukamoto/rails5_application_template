@@ -1,4 +1,4 @@
-worker_processes 10
+worker_processes 3
 
 pid File.expand_path('tmp/pids/unicorn.pid', ENV['RAILS_ROOT']).to_s
 listen 5001
