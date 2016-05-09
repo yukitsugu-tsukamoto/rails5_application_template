@@ -65,7 +65,7 @@ Style/BracesAroundHashParameters:
   Enabled: false
 
 Style/CaseEquality:
-  Enabled: true
+  Enabled: false
 
 Style/CaseIndentation:
   Enabled: false

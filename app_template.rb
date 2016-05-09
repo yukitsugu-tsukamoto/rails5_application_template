@@ -44,9 +44,6 @@ gem 'hashie'
 gem 'cells'
 gem 'cells-haml'
 
-# Exception Notifier
-gem 'exception_notification'
-
 # Embed the V8 Javascript Interpreter
 gem 'therubyracer'
 
@@ -61,6 +58,19 @@ group :development do
 
   # help to kill N+1
   gem 'bullet'
+
+  # Syntax Checker
+  # hook event pre-commit, pre-push
+  gem 'overcommit', require: false
+
+  # A static analysis security vulnerability scanner
+  gem 'brakeman', require: false
+
+  # Syntax checker for HAML
+  gem 'haml-lint', require: false
+
+  # Syntax checker for CSS
+  gem 'ruby_css_lint', require: false
 
   # A Ruby static code analyzer
   gem 'rubocop', require: false
@@ -159,17 +169,8 @@ insert_into_file 'config/environments/development.rb',%(
   end
 ), after: 'config.assets.debug = true'
 
-# Exception Notifier
-mail_address = ask("What's your current email address?")
+# Improve security
 insert_into_file 'config/environments/production.rb',%(
-  # Exception Notifier
-  Rails.application.config.middleware.use ExceptionNotification::Rack,
-    :email => {
-      :email_prefix => '[#{app_name}] ',
-      :sender_address => '"notifier" <#{mail_address}>',
-      :exception_recipients => "#{mail_address}"
-    }
-
   # Sanitizing parameter
   config.filter_parameters += [/(password|private_token|api_endpoint)/i]
 ), after: 'config.active_record.dump_schema_after_migration = false'
@@ -251,9 +252,11 @@ insert_into_file 'spec/rails_helper.rb',%(
 insert_into_file 'spec/rails_helper.rb', "\nrequire 'factory_girl_rails'", after: "require 'rspec/rails'"
 run 'rm -rf test'
 
-# Rubocop
+# Checker
 # ----------------------------------------------------------------
 get 'https://raw.github.com/morizyun/rails5_application_template/master/root/.rubocop.yml', '.rubocop.yml'
+get 'https://raw.github.com/morizyun/rails5_application_template/master/root/.overcommit.yml', '.overcommit.yml'
+get 'https://raw.github.com/morizyun/rails5_application_template/master/root/.haml-lint.yml', '.haml-lint.yml'
 
 # Rake DB Create
 # ----------------------------------------------------------------
@@ -261,8 +264,17 @@ Bundler.with_clean_env do
   run 'bundle exec rake db:create'
 end
 
+# Remove Invalid Files
+run 'rm -rf ./lib/templates'
+
 # git init
 # ----------------------------------------------------------------
 git :init
 git :add => '.'
 git :commit => "-a -m 'first commit'"
+
+# overcommit
+# ----------------------------------------------------------------
+Bundler.with_clean_env do
+  run 'bundle exec overcommit --sign'
+end
