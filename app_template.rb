@@ -125,6 +125,25 @@ group :production do
 end
 CODE
 
+# Error Notification
+slack_url = ask('What is a slack hook URL to notify an error in your app?[or just ENTER]')
+if !slack_url.nil? && !slack_url.empty?
+insert_into_file 'Gemfile',%q{
+
+# Exception Notifier
+gem 'exception_notification', github: 'smartinez87/exception_notification', branch: 'rails5'
+gem 'slack-notifier'
+}, after: "gem 'figaro', github: 'morizyun/figaro'"
+
+insert_into_file 'config/environments/production.rb',%(
+
+  # Exception Notifier to Slack
+  config.add_notifier :slack, {
+    :webhook_url => "#{slack_url}"
+  }
+), after: 'config.active_record.dump_schema_after_migration = false'
+end
+
 Bundler.with_clean_env do
   run 'bundle install --path vendor/bundle --jobs=4 --without production'
 end
@@ -159,7 +178,7 @@ application  do
 end
 
 # For Bullet (N+1 Problem)
-insert_into_file 'config/environments/development.rb',%(
+insert_into_file 'config/environments/development.rb', %(
   # Bullet Setting (help to kill N + 1 query)
   config.after_initialize do
     Bullet.enable = true # enable Bullet gem, otherwise do nothing
@@ -170,10 +189,11 @@ insert_into_file 'config/environments/development.rb',%(
 ), after: 'config.assets.debug = true'
 
 # Improve security
-insert_into_file 'config/environments/production.rb',%(
+insert_into_file 'config/environments/production.rb',%q{
+
   # Sanitizing parameter
   config.filter_parameters += [/(password|private_token|api_endpoint)/i]
-), after: 'config.active_record.dump_schema_after_migration = false'
+}, after: 'config.active_record.dump_schema_after_migration = false'
 
 # set Japanese locale
 get 'https://raw.github.com/svenfuchs/rails-i18n/master/rails/locale/ja.yml', 'config/locales/ja.yml'
