@@ -202,6 +202,8 @@ get 'https://raw.github.com/svenfuchs/rails-i18n/master/rails/locale/ja.yml', 'c
 Bundler.with_clean_env do
   run 'bundle exec rake haml:replace_erbs'
 end
+get 'https://raw.github.com/morizyun/rails5_application_template/master/app/views/layouts/application.html.haml', 'app/views/layouts/application.html.haml'
+get 'https://raw.github.com/morizyun/rails5_application_template/master/app/views/layouts/mailer.html.haml', 'app/views/layouts/mailer.html.haml'
 
 # Bootstrap/Bootswach/Font-Awesome
 run 'rm -rf app/assets/stylesheets/application.css'
