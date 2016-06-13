@@ -10,31 +10,31 @@ Fill following commands:
 
 ```
 # Update Homebrew
-brew update
+$ brew update
 
 # Generate modern .gitignore
 $ brew install wget gibo
 
 # Update ruby-build
-brew upgrade ruby-build
+$ brew upgrade ruby-build
 
 # Show some ruby versions which rbenv can install
-rbenv install --list
+$ rbenv install --list
 
 # Install latest Ruby(e.g. 2.3.1)
-rbenv install 2.3.1
+$ rbenv install 2.3.1
 
 # Set defalt ruby version in your local
-echo '2.3.1' > .ruby-version
+$ echo '2.3.1' > .ruby-version
 
 # check current rbenv setting
-rbenv versions
+$ rbenv versions
 
 # Set to use rails latest version(e.g. 5.0.0.rc1)
-echo "source 'https://rubygems.org'\n\ngem 'rails', '>= 5.0.0.rc1'" > Gemfile
+$ echo "source 'https://rubygems.org'\n\ngem 'rails', '>= 5.0.0.rc1'" > Gemfile
 
 # Install RubyGems in Gemfile
-bundle install --jobs=4 --path=vendor/bundle
+$ bundle install --jobs=4 --path=vendor/bundle
 ```
 
 ## Execution command
