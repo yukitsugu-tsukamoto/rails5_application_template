@@ -4,7 +4,7 @@ Rails5 Application Template. - [Rails Application Templates — Ruby on Rails Gu
 
 It's easy to start Rails5 application with useful gems.
 
-## Reparation
+## Preparation
 
 Fill following commands:
 
