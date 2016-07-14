@@ -132,13 +132,15 @@ gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'slack-notifier'
 }, after: "gem 'figaro', github: 'morizyun/figaro'"
 
-insert_into_file 'config/environments/production.rb',%(
+create_file 'config/initializers/exception_notification.rb',%(
+require 'exception_notification/rails'
 
-  # Exception Notifier to Slack
+ExceptionNotification.configure do |config|
   config.add_notifier :slack, {
     :webhook_url => "#{slack_url}"
   }
-), after: 'config.active_record.dump_schema_after_migration = false'
+end if Rails.env.production?
+)
 end
 
 Bundler.with_clean_env do
