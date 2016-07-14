@@ -91,9 +91,6 @@ group :development, :test do
   # PG/MySQL Log Formatter
   gem 'rails-flog'
 
-  # Assets log cleaner
-  gem 'quiet_assets'
-
   # Rspec
   gem 'rspec-rails'
 
@@ -131,7 +128,7 @@ if !slack_url.nil? && !slack_url.empty?
 insert_into_file 'Gemfile',%q{
 
 # Exception Notifier
-gem 'exception_notification', github: 'smartinez87/exception_notification', branch: 'rails5'
+gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'slack-notifier'
 }, after: "gem 'figaro', github: 'morizyun/figaro'"
 
