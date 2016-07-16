@@ -6,6 +6,8 @@ It's easy to start Rails5 application with useful gems.
 
 ## Preparation
 
+### Upgrading ruby version in rbenv
+
 Fill following commands:
 
 ```
@@ -23,18 +25,13 @@ $ rbenv install --list
 
 # Install latest Ruby(e.g. 2.3.1)
 $ rbenv install 2.3.1
+```
 
-# Set defalt ruby version in your local
-$ echo '2.3.1' > .ruby-version
+### Upgrading Rails gem
 
-# check current rbenv setting
-$ rbenv versions
-
-# Set to use rails latest version(e.g. 5.0.0.rc1)
-$ echo "source 'https://rubygems.org'\n\ngem 'rails', '>= 5.0.0.rc1'" > Gemfile
-
-# Install RubyGems in Gemfile
-$ bundle install --jobs=4 --path=vendor/bundle
+```
+# Set to use rails latest version(e.g. 5.0.0)
+$ gem install rails -v 5.0.0
 ```
 
 ## Execution command
@@ -58,7 +55,7 @@ Description of this template in Japanese is as follows;
 ## Supported versions
 
 - Ruby 2.3.1
-- Rails 5.0.0.rc1
+- Rails 5.0.0
 
 ## Contributing
 
