@@ -40,10 +40,10 @@ Execute following commands:
 
 ```
 # if you want to use PostgreSQL, please execute following command;
-$ bundle exec rails new test_app --database=postgresql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
+$ bundle exec rails new test_app --version 5.0.0 --database=postgresql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
 
 # if you want to use MySQL, please execute following command;
-$ bundle exec rails new test_app --database=mysql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
+$ bundle exec rails new test_app --version 5.0.0 --database=mysql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
 ```
 
 ## Detail explanation
