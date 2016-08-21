@@ -52,6 +52,10 @@ PreCommit:
     enabled: true
     on_warn: fail
 
+PostCheckout:
+  BundleInstall:
+    enabled: true
+
 PrePush:
     # Unit & Integration TEST
   RSpec:
