@@ -69,6 +69,9 @@ group :development do
   # Checks for vulnerable versions of gems
   gem 'bundler-audit'
 
+  # Style checker that helps keep CoffeeScript code clean and consistent
+  gem 'coffeelint'
+
   # Syntax checker for HAML
   gem 'haml-lint', require: false
 

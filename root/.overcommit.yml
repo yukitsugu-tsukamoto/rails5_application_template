@@ -21,6 +21,11 @@ PreCommit:
     enabled: true
     on_warn: fail
 
+  # Style checker for CoffeeScript
+  CoffeeLint:
+    enabled: true
+    on_warn: fail
+
   # Style Check in HAML
   HamlLint:
     enabled: true
