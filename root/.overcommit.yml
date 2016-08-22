@@ -1,25 +1,18 @@
 gemfile: 'Gemfile'
 
-PreCommit:
-  # Style Check
-  RuboCop:
+PostCheckout:
+  BundleInstall:
     enabled: true
-    command: ['bundle', 'exec', 'rubocop', '-c', './.rubocop.yml']
-    on_warn: fail
 
+PreCommit:
   # Security Check
   Brakeman:
     enabled: true
     command: ['bundle', 'exec', 'brakeman']
     on_warn: fail
 
-  # Style Check in HAML
-  HamlLint:
-    enabled: true
-    on_warn: fail
-
-  # YAML Check
-  YamlSyntax:
+  # Checks for vulnerable versions of gems
+  BundleAudit:
     enabled: true
     on_warn: fail
 
@@ -28,8 +21,8 @@ PreCommit:
     enabled: true
     on_warn: fail
 
-  # Migration Check
-  RailsSchemaUpToDate:
+  # Style Check in HAML
+  HamlLint:
     enabled: true
     on_warn: fail
 
@@ -38,17 +31,29 @@ PreCommit:
     enabled: true
     on_warn: fail
 
-PostCheckout:
-  BundleInstall:
+  # Migration Check
+  RailsSchemaUpToDate:
     enabled: true
+    on_warn: fail
+
+  # Style Check
+  RuboCop:
+    enabled: true
+    command: ['bundle', 'exec', 'rubocop', '-c', './.rubocop.yml']
+    on_warn: fail
+
+  # YAML Check
+  YamlSyntax:
+    enabled: true
+    on_warn: fail
 
 PrePush:
-    # Unit & Integration TEST
+  BundleInstall:
+    enabled: true
+    on_warn: fail
+
+  # Unit & Integration TEST
   RSpec:
     enabled: true
     command: ['bundle', 'exec', 'rspec', 'spec']
-    on_warn: fail
-
-  BundleInstall:
-    enabled: true
     on_warn: fail

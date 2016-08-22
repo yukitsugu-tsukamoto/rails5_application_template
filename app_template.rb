@@ -66,6 +66,9 @@ group :development do
   # A static analysis security vulnerability scanner
   gem 'brakeman', require: false
 
+  # Checks for vulnerable versions of gems
+  gem 'bundler-audit'
+
   # Syntax checker for HAML
   gem 'haml-lint', require: false
 
