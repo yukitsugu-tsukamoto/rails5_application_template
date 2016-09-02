@@ -5,12 +5,6 @@ PostCheckout:
     enabled: true
 
 PreCommit:
-  # Security Check
-  Brakeman:
-    enabled: true
-    command: ['bundle', 'exec', 'brakeman']
-    on_warn: fail
-
   # Checks for vulnerable versions of gems
   BundleAudit:
     enabled: true
@@ -53,6 +47,12 @@ PreCommit:
     on_warn: fail
 
 PrePush:
+  # Security Check
+  Brakeman:
+    enabled: true
+    command: ['bundle', 'exec', 'brakeman']
+    on_warn: fail
+
   BundleInstall:
     enabled: true
     on_warn: fail
