@@ -37,18 +37,12 @@ gem 'kaminari'
 # Process Management
 gem 'foreman'
 
-# Hash extensions
-gem 'hashie'
-
 # Presenter Layer Helper
 gem 'cells'
 gem 'cells-haml'
 
-# Embed the V8 Javascript Interpreter
-gem 'therubyracer'
-
 # configuration using ENV
-gem 'figaro', github: 'morizyun/figaro'
+gem 'figaro', git: 'https://github.com/morizyun/figaro.git'
 
 # ============================
 # Environment Group
@@ -67,10 +61,10 @@ group :development do
   gem 'brakeman', require: false
 
   # Checks for vulnerable versions of gems
-  gem 'bundler-audit'
+  gem 'bundler-audit', require: false
 
   # Style checker that helps keep CoffeeScript code clean and consistent
-  gem 'coffeelint'
+  gem 'coffeelint', require: false
 
   # Syntax checker for HAML
   gem 'haml-lint', require: false
@@ -85,9 +79,7 @@ end
 group :development, :test do
   # Pry & extensions
   gem 'pry-rails'
-  gem 'pry-coolline'
   gem 'pry-byebug'
-  gem 'rb-readline'
 
   # Show SQL result in Pry console
   gem 'hirb'
@@ -121,11 +113,6 @@ group :test do
   # This gem brings back assigns to your controller tests
   gem 'rails-controller-testing'
 end
-
-group :production do
-  # For Heroku / Dokku
-  gem 'rails_12factor'
-end
 CODE
 
 # Error Notification
@@ -134,9 +121,9 @@ if !slack_url.nil? && !slack_url.empty?
 insert_into_file 'Gemfile',%q{
 
 # Exception Notifier
-gem 'exception_notification', github: 'smartinez87/exception_notification'
+gem 'exception_notification', git: 'https://github.com/smartinez87/exception_notification.git'
 gem 'slack-notifier'
-}, after: "gem 'figaro', github: 'morizyun/figaro'"
+}, after: "gem 'foreman'"
 
 create_file 'config/initializers/exception_notification.rb',%(
 require 'exception_notification/rails'
@@ -207,8 +194,6 @@ get 'https://raw.github.com/svenfuchs/rails-i18n/master/rails/locale/ja.yml', 'c
 Bundler.with_clean_env do
   run 'bundle exec rake haml:replace_erbs'
 end
-get 'https://raw.github.com/morizyun/rails5_application_template/master/app/views/layouts/application.html.haml', 'app/views/layouts/application.html.haml'
-get 'https://raw.github.com/morizyun/rails5_application_template/master/app/views/layouts/mailer.html.haml', 'app/views/layouts/mailer.html.haml'
 
 # Bootstrap/Bootswach/Font-Awesome
 run 'rm -rf app/assets/stylesheets/application.css'
@@ -294,14 +279,31 @@ end
 # Remove Invalid Files
 run 'rm -rf ./lib/templates'
 
+
+# Rubocop Auto correct
+# ----------------------------------------------------------------
+Bundler.with_clean_env do
+  run 'bundle exec rubocop --auto-correct'
+  run 'bundle exec rubocop --auto-gen-config'
+end
+
+# Bundler-audit
+# ----------------------------------------------------------------
+Bundler.with_clean_env do
+  run 'bundle-audit update'
+end
+
 # git init
 # ----------------------------------------------------------------
 git :init
 git :add => '.'
-git :commit => "-a -m 'first commit'"
 
 # overcommit
 # ----------------------------------------------------------------
 Bundler.with_clean_env do
   run 'bundle exec overcommit --sign'
 end
+
+# git commit
+# ----------------------------------------------------------------
+git :commit => "-a -m 'Initial commit'"

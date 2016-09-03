@@ -27,11 +27,11 @@ $ rbenv install --list
 $ rbenv install 2.3.1
 ```
 
-### Upgrading Rails gem
+### Install latest Rails gem
 
 ```
-# Set to use rails latest version(e.g. 5.0.0)
-$ gem install rails -v 5.0.0
+# Set to use rails latest version(e.g. 5.0.0.1)
+$ gem install rails -v 5.0.0.1
 ```
 
 ## Execution command
@@ -40,10 +40,10 @@ Execute following commands:
 
 ```
 # if you want to use PostgreSQL, please execute following command;
-$ bundle exec rails new test_app --version 5.0.0 --database=postgresql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
+$ rails new test_app --database=postgresql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
 
 # if you want to use MySQL, please execute following command;
-$ bundle exec rails new test_app --version 5.0.0 --database=mysql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
+$ rails new test_app --database=mysql -T --skip-bundle -m https://raw.githubusercontent.com/morizyun/rails5_application_template/master/app_template.rb
 ```
 
 ## Detail explanation
@@ -55,7 +55,7 @@ Description of this template in Japanese is as follows;
 ## Supported versions
 
 - Ruby 2.3.1
-- Rails 5.0.0
+- Rails 5.0.0.1
 
 ## Contributing
 
