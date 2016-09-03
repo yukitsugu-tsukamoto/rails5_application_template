@@ -41,7 +41,7 @@ gem 'foreman'
 gem 'cells'
 gem 'cells-haml'
 
-# configuration using ENV
+# Configuration using ENV
 gem 'figaro', git: 'https://github.com/morizyun/figaro.git'
 
 # ============================
@@ -52,6 +52,12 @@ group :development do
 
   # help to kill N+1
   gem 'bullet'
+
+  # Annotate Rails classes with schema and routes info
+  gem 'annotate'
+
+  # To generate haml view by scaffold or other generate command
+  gem 'haml-rails'
 
   # Syntax Checker
   # hook event pre-commit, pre-push
