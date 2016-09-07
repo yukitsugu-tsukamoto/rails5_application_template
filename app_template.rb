@@ -53,9 +53,6 @@ group :development do
   # help to kill N+1
   gem 'bullet'
 
-  # Annotate Rails classes with schema and routes info
-  gem 'annotate'
-
   # To generate haml view by scaffold or other generate command
   gem 'haml-rails'
 
