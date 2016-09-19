@@ -304,7 +304,7 @@ if yes?('Do you use Guard? [yes or ELSE]')
 
   Bundler.with_clean_env do
     run 'bundle install --path vendor/bundle --jobs=4 --without production'
-    run 'bundle exec guard init bundler rspec rubocop'
+    run 'bundle exec guard init rspec rubocop livereload'
   end
 end
 
