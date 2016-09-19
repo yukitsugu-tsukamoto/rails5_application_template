@@ -209,9 +209,9 @@ run "echo 'web: bundle exec puma -C config/puma/production.rb' > Procfile"
 if yes?('Do you use Airbrake/Errbit? [yes or ELSE]')
   insert_into_file 'Gemfile',%q{
 
-  # Exception Catcher
-    gem 'airbrake'
-  }, after: "gem 'foreman'"
+# Exception Catcher
+gem 'airbrake'
+}, after: "gem 'foreman'"
 
   run 'wget https://raw.github.com/morizyun/rails5_application_template/tree/master/config/initializers/airbrake.rb -P config/initializers'
   run "echo '\nAIRBRAKE_HOST=\nAIRBRAKE_PROJECT_ID=\nAIRBRAKE_PROJECT_KEY=\n'"
