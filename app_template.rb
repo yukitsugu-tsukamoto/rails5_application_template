@@ -198,11 +198,11 @@ run 'touch .env.test'
 run "echo '\n.env\n.env*' >> .gitignore"
 
 # Puma(App Server)
-run 'mkdir config/puma'
-get 'https://raw.github.com/morizyun/rails5_application_template/master/config/puma/production.rb', 'config/puma/production.rb'
+run 'rm -rf config/puma.rb'
+get 'https://raw.github.com/morizyun/rails5_application_template/master/config/puma.rb', 'config/puma.rb'
 
 # Procfile
-run "echo 'web: bundle exec puma -C config/puma/production.rb' > Procfile"
+run "echo 'web: bundle exec puma -C config/puma.rb' > Procfile"
 
 # Error Notification
 # ----------------------------------------------------------------
@@ -229,6 +229,8 @@ end
 run "echo '--color -f d' > .rspec"
 
 insert_into_file 'spec/rails_helper.rb',%(
+  config.order = 'random'
+
   config.before :suite do
     DatabaseRewinder.clean_all
   end
