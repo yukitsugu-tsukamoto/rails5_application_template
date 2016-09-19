@@ -97,6 +97,11 @@ group :development, :test do
 
   # test fixture
   gem 'factory_girl_rails'
+
+  # Handle events on file modifications
+  gem 'guard-rspec',      require: false
+  gem 'guard-rubocop',    require: false
+  gem 'guard-livereload', require: false
 end
 
 group :test do
@@ -292,6 +297,23 @@ end
 # ----------------------------------------------------------------
 Bundler.with_clean_env do
   run 'bundle-audit update'
+end
+
+# Guard
+# ----------------------------------------------------------------
+if yes?('Do you use Guard? [yes or ELSE]')
+  insert_into_file 'Gemfile',%q{
+
+  # Handle events on file modifications
+  gem 'guard-rspec',      require: false
+  gem 'guard-rubocop',    require: false
+  gem 'guard-livereload', require: false
+}, after: "gem 'factory_girl_rails'"
+
+  Bundler.with_clean_env do
+    run 'bundle install --path vendor/bundle --jobs=4 --without production'
+    run 'bundle exec guard init bundler rspec rubocop'
+  end
 end
 
 # Wercker(CI)
