@@ -42,7 +42,7 @@ gem 'cells'
 gem 'cells-haml'
 
 # Configuration using ENV
-gem 'figaro', git: 'https://github.com/morizyun/figaro.git'
+gem 'dotenv-rails'
 
 # ============================
 # Environment Group
@@ -118,27 +118,6 @@ group :test do
 end
 CODE
 
-# Error Notification
-slack_url = ask('What is a slack hook URL to notify an error in your app?[or just ENTER]')
-if !slack_url.nil? && !slack_url.empty?
-insert_into_file 'Gemfile',%q{
-
-# Exception Notifier
-gem 'exception_notification', git: 'https://github.com/smartinez87/exception_notification.git'
-gem 'slack-notifier'
-}, after: "gem 'foreman'"
-
-create_file 'config/initializers/exception_notification.rb',%(
-require 'exception_notification/rails'
-
-ExceptionNotification.configure do |config|
-  config.add_notifier :slack, {
-    :webhook_url => "#{slack_url}"
-  }
-end if Rails.env.production?
-)
-end
-
 Bundler.with_clean_env do
   run 'bundle install --path vendor/bundle --jobs=4 --without production'
 end
@@ -212,10 +191,11 @@ Bundler.with_clean_env do
   run 'bundle exec rails g kaminari:config'
 end
 
-# Initialize Figaro config
-Bundler.with_clean_env do
-  run 'bundle exec figaro install'
-end
+# Initialize dotenv config
+run 'touch .env'
+run 'touch .env.development'
+run 'touch .env.test'
+run "echo '\n.env\n.env*' >> .gitignore"
 
 # Puma(App Server)
 run 'mkdir config/puma'
@@ -223,6 +203,22 @@ get 'https://raw.github.com/morizyun/rails5_application_template/master/config/p
 
 # Procfile
 run "echo 'web: bundle exec puma -C config/puma/production.rb' > Procfile"
+
+# Error Notification
+# ----------------------------------------------------------------
+if yes?('Do you use Airbrake/Errbit? [yes or ELSE]')
+  insert_into_file 'Gemfile',%q{
+
+  # Exception Catcher
+    gem 'airbrake'
+  }, after: "gem 'foreman'"
+
+  run 'wget https://raw.github.com/morizyun/rails5_application_template/tree/master/config/initializers/airbrake.rb -P config/initializers'
+  run "echo '\nAIRBRAKE_HOST=\nAIRBRAKE_PROJECT_ID=\nAIRBRAKE_PROJECT_KEY=\n'"
+  run "echo 'Please Set AIRBRAKE_HOST, AIRBRAKE_PROJECT_ID, AIRBRAKE_PROJECT_KEY in your environment variables'"
+
+  run 'bundle install --path vendor/bundle --jobs=4 --without production'
+end
 
 # Rspec
 # ----------------------------------------------------------------
