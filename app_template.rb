@@ -285,14 +285,6 @@ end
 # Remove Invalid Files
 run 'rm -rf ./lib/templates'
 
-
-# Rubocop Auto correct
-# ----------------------------------------------------------------
-Bundler.with_clean_env do
-  run 'bundle exec rubocop --auto-correct'
-  run 'bundle exec rubocop --auto-gen-config'
-end
-
 # Bundler-audit
 # ----------------------------------------------------------------
 Bundler.with_clean_env do
@@ -322,6 +314,13 @@ if yes?('Do you use wercker? [yes or ELSE]')
   run 'wget https://raw.github.com/morizyun/rails5_application_template/tree/master/root/wercker.yml'
   gsub_file 'wercker.yml', /%RUBY_VERSION/, ruby_version
   run "echo 'Please Set SLACK_URL to https://app.wercker.com'"
+end
+
+# Rubocop Auto correct
+# ----------------------------------------------------------------
+Bundler.with_clean_env do
+  run 'bundle exec rubocop --auto-correct'
+  run 'bundle exec rubocop --auto-gen-config'
 end
 
 # git init
