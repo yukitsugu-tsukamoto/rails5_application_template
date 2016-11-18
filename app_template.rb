@@ -86,7 +86,6 @@ group :development, :test do
 
   # Show SQL result in Pry console
   gem 'hirb'
-  gem 'hirb-unicode'
   gem 'awesome_print'
 
   # PG/MySQL Log Formatter
