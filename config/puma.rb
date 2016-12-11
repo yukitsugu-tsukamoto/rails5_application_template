@@ -1,5 +1,5 @@
 # Workers are forked web-server processes
-workers ENV.fetch('RAILS_WORKERS') { Rails.env.development? ? 1 : 2 }.to_i
+workers ENV.fetch('RAILS_WORKERS') { Rails.env.development? ? 0 : 2 }.to_i
 
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers a minimum and maximum.
