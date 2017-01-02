@@ -15,6 +15,12 @@ run "echo '#{ruby_version}' > ./.ruby-version"
 # add to Gemfile
 append_file 'Gemfile', <<-CODE
 # ============================
+# Controller
+# ============================
+# Controller action arguments parameterizer
+gem 'action_args'
+
+# ============================
 # View
 # ============================
 # Bootstrap & Bootswatch & font-awesome
