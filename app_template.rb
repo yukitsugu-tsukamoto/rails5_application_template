@@ -189,7 +189,7 @@ end
 
 # Bootstrap/Bootswach/Font-Awesome
 run 'rm -rf app/assets/stylesheets/application.css'
-get 'https://raw.github.com/morizyun/rails5_application_template/master/app/assets/stylesheets/application.css.scss', 'app/assets/stylesheets/application.css.scss'
+get 'https://raw.github.com/yukitsugu-tsukamoto/rails5_application_template/master/app/assets/stylesheets/application.css.scss', 'app/assets/stylesheets/application.css.scss'
 
 # Initialize SimpleForm
 Bundler.with_clean_env do
@@ -209,7 +209,7 @@ run "echo '\n.env\n.env*' >> .gitignore"
 
 # Puma(App Server)
 run 'rm -rf config/puma.rb'
-get 'https://raw.github.com/morizyun/rails5_application_template/master/config/puma.rb', 'config/puma.rb'
+get 'https://raw.github.com/yukitsugu-tsukamoto/rails5_application_template/master/config/puma.rb', 'config/puma.rb'
 
 # Procfile
 run "echo 'web: bundle exec puma -C config/puma.rb' > Procfile"
@@ -223,7 +223,7 @@ if yes?('Do you use Airbrake/Errbit? [yes or ELSE]')
 gem 'airbrake'
 }, after: "gem 'foreman'"
 
-  run 'wget https://raw.github.com/morizyun/rails5_application_template/tree/master/config/initializers/airbrake.rb -P config/initializers'
+  run 'wget https://raw.github.com/yukitsugu-tsukamoto/rails5_application_template/tree/master/config/initializers/airbrake.rb -P config/initializers'
   run "echo '\nAIRBRAKE_HOST=\nAIRBRAKE_PROJECT_ID=\nAIRBRAKE_PROJECT_KEY=\n'"
   run "echo 'Please Set AIRBRAKE_HOST, AIRBRAKE_PROJECT_ID, AIRBRAKE_PROJECT_KEY in your environment variables'"
 
@@ -277,9 +277,9 @@ run 'rm -rf test'
 
 # Checker
 # ----------------------------------------------------------------
-get 'https://raw.github.com/morizyun/rails5_application_template/master/root/.rubocop.yml', '.rubocop.yml'
-get 'https://raw.github.com/morizyun/rails5_application_template/master/root/.overcommit.yml', '.overcommit.yml'
-get 'https://raw.github.com/morizyun/rails5_application_template/master/root/.haml-lint.yml', '.haml-lint.yml'
+get 'https://raw.github.com/yukitsugu-tsukamoto/rails5_application_template/master/root/.rubocop.yml', '.rubocop.yml'
+get 'https://raw.github.com/yukitsugu-tsukamoto/rails5_application_template/master/root/.overcommit.yml', '.overcommit.yml'
+get 'https://raw.github.com/yukitsugu-tsukamoto/rails5_application_template/master/root/.haml-lint.yml', '.haml-lint.yml'
 
 # Rake DB Create
 # ----------------------------------------------------------------
@@ -298,20 +298,20 @@ end
 
 # Guard
 # ----------------------------------------------------------------
-if yes?('Do you use Guard? [yes or ELSE]')
-  insert_into_file 'Gemfile',%q{
-
-  # Handle events on file modifications
-  gem 'guard-rspec',      require: false
-  gem 'guard-rubocop',    require: false
-  gem 'guard-livereload', require: false
-}, after: "gem 'factory_girl_rails'"
-
-  Bundler.with_clean_env do
-    run 'bundle install --path vendor/bundle --jobs=4 --without production'
-    run 'bundle exec guard init rspec rubocop livereload'
-  end
-end
+# if yes?('Do you use Guard? [yes or ELSE]')
+#   insert_into_file 'Gemfile',%q{
+#
+#   # Handle events on file modifications
+#   gem 'guard-rspec',      require: false
+#   gem 'guard-rubocop',    require: false
+#   gem 'guard-livereload', require: false
+# }, after: "gem 'factory_girl_rails'"
+#
+#   Bundler.with_clean_env do
+#     run 'bundle install --path vendor/bundle --jobs=4 --without production'
+#     run 'bundle exec guard init rspec rubocop livereload'
+#   end
+# end
 
 # Wercker(CI)
 # ----------------------------------------------------------------
@@ -323,10 +323,10 @@ end
 
 # Rubocop Auto correct
 # ----------------------------------------------------------------
-Bundler.with_clean_env do
-  run 'bundle exec rubocop --auto-correct'
-  run 'bundle exec rubocop --auto-gen-config'
-end
+# Bundler.with_clean_env do
+#   run 'bundle exec rubocop --auto-correct'
+#   run 'bundle exec rubocop --auto-gen-config'
+# end
 
 # git init
 # ----------------------------------------------------------------
