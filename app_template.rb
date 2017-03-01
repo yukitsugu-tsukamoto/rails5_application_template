@@ -315,11 +315,11 @@ end
 
 # Wercker(CI)
 # ----------------------------------------------------------------
-if yes?('Do you use wercker? [yes or ELSE]')
-  run 'wget https://raw.githubusercontent.com/morizyun/rails5_application_template/master/root/wercker.yml'
-  gsub_file 'wercker.yml', /%RUBY_VERSION/, ruby_version
-  run "echo 'Please Set SLACK_URL to https://app.wercker.com'"
-end
+# if yes?('Do you use wercker? [yes or ELSE]')
+#   run 'wget https://raw.githubusercontent.com/morizyun/rails5_application_template/master/root/wercker.yml'
+#   gsub_file 'wercker.yml', /%RUBY_VERSION/, ruby_version
+#   run "echo 'Please Set SLACK_URL to https://app.wercker.com'"
+# end
 
 # Rubocop Auto correct
 # ----------------------------------------------------------------
