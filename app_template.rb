@@ -40,6 +40,11 @@ gem 'kaminari'
 # ============================
 # Utils
 # ============================
+# activeadmin
+gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
+gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
+gem 'devise' # if you need
+
 # Process Management
 gem 'foreman'
 
@@ -49,6 +54,15 @@ gem 'cells-haml'
 
 # Configuration using ENV
 gem 'dotenv-rails'
+
+# LogManager
+gem 'remote_syslog_logger'
+# AWS
+gem 'aws-sdk-rails'
+# serializer
+gem 'active_model_serializers'
+# Cross-Origin Resource Sharing (CORS)
+gem 'rack-cors'
 
 # ============================
 # Environment Group
@@ -98,15 +112,19 @@ group :development, :test do
   gem 'rails-flog'
 
   # Rspec
-  gem 'rspec-rails'
-
+  gem 'rspec-core', github: 'rspec/rspec-core', branch: 'master'
+  gem 'rspec-support', github: 'rspec/rspec-support', branch: 'master'
+  gem 'rspec-expectations', github: 'rspec/rspec-expectations', branch: 'master'
+  gem 'rspec-mocks', github: 'rspec/rspec-mocks', branch: 'master'
+  gem 'rspec-rails', github: 'rspec/rspec-rails', branch: 'master'
   # test fixture
   gem 'factory_girl_rails'
 
-  # Handle events on file modifications
-  gem 'guard-rspec',      require: false
-  gem 'guard-rubocop',    require: false
-  gem 'guard-livereload', require: false
+  # annotate schema on model
+  gem 'annotate', github: 'ctran/annotate_models'
+  # add comment schema
+  gem 'migration_comments'
+  gem 'simplecov'
 end
 
 group :test do
