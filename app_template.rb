@@ -100,7 +100,10 @@ group :development do
 
   #Capistrano
   #gem 'capistrano', '~> 3.6'
-  #gem 'capistrano-rails', '~> 1.2'
+  #gem 'capistrano-rails', '~> 1.2
+  #gem 'capistrano-rbenv'
+  #gem 'capistrano-bundler'
+  #gem 'capistrano3-unicorn'
 end
 
 group :development, :test do
