@@ -97,6 +97,10 @@ group :development do
 
   # A Ruby static code analyzer
   gem 'rubocop', require: false
+
+  #Capistrano
+  #gem 'capistrano', '~> 3.6'
+  #gem 'capistrano-rails', '~> 1.2'
 end
 
 group :development, :test do
